@@ -31,19 +31,8 @@ export default {
     TodoSection,
   },
 
-  async mounted() {
-    try {
-      const response = await fetch('/db/todo.json');
-
-      if (response.ok) {
-        const data = await response.json();
-        this.todos = data;
-      } else {
-        console.error('Error loading todos:', response.status);
-      }
-    } catch (error) {
-      console.error('Error loading todos:', error);
-    }
+  mounted() {
+    this.getTodos();
   },
 
   computed: {
@@ -63,6 +52,21 @@ export default {
           title: name,
           completed: false,
         });
+      }
+    },
+
+    async getTodos() {
+      try {
+        const response = await fetch('/db/todo.json');
+
+        if (response.ok) {
+          const data = await response.json();
+          this.todos = data;
+        } else {
+          console.error('Error loading todos:', response.status);
+        }
+      } catch (error) {
+        console.error('Error loading todos:', error);
       }
     },
 
