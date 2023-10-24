@@ -1,0 +1,57 @@
+// display
+@mixin display_flex(
+  $flex: null,
+  $align: null,
+  $justify: null,
+  $direction: null,
+  $gap: null,
+  $column-gap: null,
+  $row-gap: null,
+  $wrap: null
+) {
+  @if ($flex == inline-flex) {
+    @extend %display_inline_flex;
+  } @else {
+    @extend %display_flex;
+  }
+
+  @if ($align) {
+    align-items: $align;
+  }
+  @if ($justify) {
+    justify-content: $justify;
+  }
+  @if ($direction) {
+    flex-direction: $direction;
+  }
+  @if ($gap) {
+    gap: $gap;
+  }
+  @if ($column-gap) {
+    column-gap: $column-gap;
+  }
+  @if ($row-gap) {
+    row-gap: $row-gap;
+  }
+  @if ($wrap) {
+    flex-wrap: $wrap;
+  }
+
+  @content;
+}
+
+@mixin display_grid($columns, $gap: null, $column-gap: null, $row-gap: null) {
+  @extend %display_grid;
+  grid-template-columns: repeat($columns, 1fr);
+
+  @if ($gap) {
+    grid-gap: $gap;
+  }
+  @if ($column-gap) {
+    column-gap: $column-gap;
+  }
+  @if ($row-gap) {
+    row-gap: $row-gap;
+  }
+  @content;
+}

@@ -1,0 +1,107 @@
+.todo {
+  @include display_flex($direction: column, $gap: 3rem);
+
+  background: $color-white;
+
+  padding: 1rem;
+
+  border-radius: 6px;
+
+  box-shadow: 0 0 8px 3px $color-shadow;
+
+  @media (min-width: 768px) {
+    @include display_flex($direction: row);
+  }
+
+  &-section {
+    @include display_flex(
+      $direction: column,
+      $justify: space-between,
+      $gap: 1rem
+    );
+
+    min-width: 280px;
+
+    box-shadow: 0 0 8px 3px $color-shadow;
+    padding: 1rem 0.5rem;
+    border-radius: 5px;
+
+    .h1 {
+      text-align: center;
+    }
+
+    &-add {
+      @include display_flex($gap: 1rem);
+
+      &-input {
+        width: 100%;
+
+        padding: 0.5rem;
+
+        border-radius: 5px;
+        border: 1px solid $color-grey-darker;
+
+        &::placeholder {
+          color: $color-grey-darker;
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      min-width: 330px;
+    }
+  }
+
+  &-list {
+    @include display_flex($direction: column, $gap: 0.5rem);
+
+    margin-bottom: auto;
+
+    &-item {
+      @include display_flex($align: center, $justify: space-between);
+
+      overflow: hidden;
+
+      border-radius: 5px;
+
+      background-color: $color-grey;
+
+      transition: background $defaultTransition;
+
+      &.completed {
+        background: $color-green;
+      }
+
+      &-text {
+        padding: 0.5rem 1rem;
+      }
+
+      &-buttons {
+        height: 100%;
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        .btn {
+          height: 100%;
+
+          padding: 0 1rem;
+
+          border-radius: 0;
+        }
+      }
+    }
+
+    &-no-todos {
+      text-align: center;
+    }
+
+    &-footer {
+      @include display_flex(
+        $align: center,
+        $justify: space-between,
+        $gap: 1rem
+      );
+    }
+  }
+}

@@ -1,0 +1,33 @@
+// display
+%display_flex {
+  display: flex;
+}
+
+%display_inline_flex {
+  display: inline-flex;
+}
+
+%display_grid {
+  display: grid;
+}
+
+// font-sizes
+%h1 {
+  font-size: 26px;
+}
+
+%h2 {
+  font-size: 22px;
+}
+
+%h3 {
+  font-size: 18px;
+}
+
+%h4 {
+  font-size: 18px;
+}
+
+%defaultFontSize {
+  font-size: 15px;
+}
