@@ -57,6 +57,8 @@
   &-list {
     @include display_flex($direction: column, $gap: rem(8));
 
+    min-height: rem(30);
+
     margin-bottom: auto;
 
     &-item {
