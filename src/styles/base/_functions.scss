@@ -1,0 +1,4 @@
+@function rem($targetPx, $base: 16) {
+  $remValue: calc($targetPx / $base) + rem;
+  @return $remValue;
+}

@@ -1,29 +1,36 @@
 <template>
-  <section class="todo">
-    <TodoSection
-      :todoList="filters.active"
-      title="Your todo list"
-      type="active"
-      @add-Todo="addTodo"
-      @remove-all="removeAll"
-      @remove-todo="removeTodo"
-    />
+  <transition appear @enter="blockAnimation">
+    <section class="todo">
+      <transition appear @enter="firstSectionAnimation">
+        <TodoSection
+          :todoList="filters.active"
+          title="Your todo list"
+          type="active"
+          @add-Todo="addTodo"
+          @remove-all="removeAll"
+          @remove-todo="removeTodo"
+        />
+      </transition>
 
-    <TodoSection
-      :todoList="filters.completed"
-      title="Completed todos"
-      type="completed"
-    />
-  </section>
+      <transition appear @enter="secondSectionAnimation">
+        <TodoSection
+          :todoList="filters.completed"
+          title="Completed todos"
+          type="completed"
+        />
+      </transition>
+    </section>
+  </transition>
 </template>
 <script>
+import { gsap } from 'gsap';
 import TodoSection from './TodoSection.vue';
 
 export default {
   data() {
     return {
       todos: [],
-      filteredTodos: [],
+      completedTodos: [],
     };
   },
 
@@ -45,13 +52,15 @@ export default {
   },
 
   methods: {
-    addTodo(name) {
-      if (name.length) {
-        this.todos.push({
+    addTodo(text) {
+      if (text.length) {
+        const newTodo = {
           id: Date.now(),
-          title: name,
+          title: text,
           completed: false,
-        });
+        };
+
+        this.todos = [...this.todos, newTodo];
       }
     },
 
@@ -75,7 +84,43 @@ export default {
     },
 
     removeAll() {
-      this.todos = [];
+      this.todos = this.filters.completed;
+    },
+
+    // animations
+    blockAnimation(el) {
+      gsap.from(el, {
+        yPercent: -100,
+        opacity: 0,
+        duration: 2,
+        ease: 'power1.inOut',
+      });
+    },
+
+    firstSectionAnimation(el) {
+      gsap.from(el, {
+        xPercent: 100,
+        rotateY: 100,
+        duration: 2,
+        delay: 2,
+        ease: 'power1.in',
+      });
+
+      gsap.from(el, {
+        opacity: 0,
+        delay: 3,
+        duration: 2,
+        ease: 'power1.inOut',
+      });
+    },
+
+    secondSectionAnimation(el) {
+      gsap.from(el, {
+        opacity: 0,
+        delay: 3.5,
+        duration: 2,
+        ease: 'power1.inOut',
+      });
     },
   },
 };

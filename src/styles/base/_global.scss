@@ -3,7 +3,7 @@
 * {
   font-family: $ff-poppins;
   @extend %defaultFontSize;
-  line-height: 1.5rem;
+  line-height: 1.5em;
 }
 
 html {
@@ -39,12 +39,6 @@ h2,
 h3,
 .h3 {
   @extend %h3;
-  font-weight: 700;
-}
-
-h4,
-.h4 {
-  @extend %h4;
   font-weight: 700;
 }
 
