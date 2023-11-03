@@ -27,7 +27,14 @@
   </div>
 </template>
 <script>
+import { gsap } from 'gsap';
+
 export default {
+  data() {
+    return {
+      isVisible: true,
+    };
+  },
   props: {
     todo: {
       type: Object,
@@ -40,9 +47,15 @@ export default {
     },
   },
 
+  mounted() {
+    this.itemOnMountAnimation(this.$el);
+  },
+
   methods: {
     toggleTodo() {
-      this.todo.completed = !this.todo.completed;
+      this.itemOnUnmount(this.$el, () => {
+        this.todo.completed = !this.todo.completed;
+      });
     },
 
     itemClasses(completeStatus) {
@@ -51,7 +64,30 @@ export default {
 
     removeTodo() {
       const id = this.todo.id;
-      this.$emit('remove-todo', id);
+      this.itemOnUnmount(this.$el, () => {
+        this.$emit('remove-todo', id);
+
+        this.isVisible = false;
+      });
+    },
+
+    // animations
+    itemOnMountAnimation(el) {
+      gsap.from(el, {
+        scale: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+      });
+    },
+
+    itemOnUnmount(el, onCompleteCallback) {
+      gsap.to(el, {
+        scale: 0,
+        height: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+        onComplete: onCompleteCallback,
+      });
     },
   },
 };

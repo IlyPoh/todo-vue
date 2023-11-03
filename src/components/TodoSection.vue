@@ -20,13 +20,17 @@
         :todo="todo"
         :type="this.type"
         @remove-todo="removeTodo"
+        ref="todoItems"
       />
-      <h3
-        v-if="!todoList.length && this.type === 'active'"
-        class="todo-list-no-todos"
-      >
-        No todos found
-      </h3>
+      <transition apppar @enter="noTodosAnimation">
+        <h3 v-if="!todoList.length" class="todo-list-no-todos">
+          {{
+            this.type === 'active'
+              ? 'No todos found'
+              : 'No completed todos found'
+          }}
+        </h3>
+      </transition>
     </div>
 
     <div v-if="this.type === 'active'" class="todo-list-footer">
@@ -40,6 +44,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 import TodoItem from './TodoItem.vue';
 
 export default {
@@ -80,7 +85,26 @@ export default {
     },
 
     removeAll() {
-      this.$emit('remove-all');
+      const animationPromises = [];
+
+      for (const todoItem of this.$refs.todoItems) {
+        const animationPromise = new Promise((resolve) => {
+          todoItem.itemOnUnmount(todoItem.$el, resolve);
+        });
+        animationPromises.push(animationPromise);
+      }
+
+      Promise.all(animationPromises).then(() => {
+        this.$emit('remove-all');
+      });
+    },
+
+    noTodosAnimation(el) {
+      gsap.from(el, {
+        opacity: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+      });
     },
   },
 };
