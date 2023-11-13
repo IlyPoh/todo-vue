@@ -1,11 +1,11 @@
 <template>
-  <section class="todo-section">
+  <section class="todo__section">
     <div class="h1">{{ title }}</div>
 
-    <form v-if="this.type === 'active'" class="todo-section-add">
+    <form v-if="this.type === 'active'" class="todo__section__add">
       <input
         v-model="newTodo"
-        class="todo-section-add-input"
+        class="todo__section__add__input"
         placeholder="Add new task..."
       />
       <button class="btn btn-purple" @click.prevent="addTodo">
@@ -13,7 +13,7 @@
       </button>
     </form>
 
-    <div class="todo-list">
+    <div class="todo__list">
       <TodoItem
         v-for="todo in todoList"
         :key="todo.id"
@@ -23,7 +23,7 @@
         ref="todoItems"
       />
       <transition apppar @enter="noTodosAnimation">
-        <h3 v-if="!todoList.length" class="todo-list-no-todos">
+        <h3 v-if="!todoList.length" class="todo__list__no-todos">
           {{
             this.type === 'active'
               ? 'No todos found'
@@ -33,8 +33,8 @@
       </transition>
     </div>
 
-    <div v-if="this.type === 'active'" class="todo-list-footer">
-      <div class="todo-list-footer-left-text">
+    <div v-if="this.type === 'active'" class="todo__list__footer">
+      <div class="todo__list__footer__left-text">
         You have {{ todoList.length }} pending tasks
       </div>
 
