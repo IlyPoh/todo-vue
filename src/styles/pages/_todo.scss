@@ -13,7 +13,7 @@
     @include display_flex($direction: row);
   }
 
-  &__section {
+  &-section {
     @include display_flex(
       $direction: column,
       $justify: space-between,
@@ -31,10 +31,10 @@
       text-align: center;
     }
 
-    &__add {
+    &-add {
       @include display_flex($gap: rem(16));
 
-      &__input {
+      &-input {
         width: 100%;
 
         padding: rem(8);
@@ -54,14 +54,14 @@
     }
   }
 
-  &__list {
+  &-list {
     @include display_flex($direction: column, $gap: rem(8));
 
     min-height: rem(30);
 
     margin-bottom: auto;
 
-    &__item {
+    &-item {
       @include display_flex($align: center, $justify: space-between);
 
       overflow: hidden;
@@ -76,11 +76,11 @@
         background: $color-green;
       }
 
-      &__text {
+      &-text {
         padding: rem(8) rem(16);
       }
 
-      &__buttons {
+      &-buttons {
         height: 100%;
         white-space: nowrap;
 
@@ -94,11 +94,11 @@
       }
     }
 
-    &__no-todos {
+    &-no-todos {
       text-align: center;
     }
 
-    &__footer {
+    &-footer {
       @include display_flex(
         $align: center,
         $justify: space-between,

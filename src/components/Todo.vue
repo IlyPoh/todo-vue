@@ -100,9 +100,8 @@ export default {
     firstSectionAnimation(el) {
       gsap.from(el, {
         xPercent: 100,
-        x: '3rem',
-        rotateY: 180,
-        duration: 3,
+        rotateY: 100,
+        duration: 2,
         delay: 2,
         ease: 'power1.in',
       });
@@ -118,7 +117,7 @@ export default {
     secondSectionAnimation(el) {
       gsap.from(el, {
         opacity: 0,
-        delay: 4,
+        delay: 3.5,
         duration: 2,
         ease: 'power1.inOut',
       });

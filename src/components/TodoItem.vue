@@ -1,10 +1,10 @@
 <template>
-  <div class="todo__list__item" :class="itemClasses(todo.completed)">
-    <div class="todo__list__item__text">
+  <div class="todo-list-item" :class="itemClasses(todo.completed)">
+    <div class="todo-list-item-text">
       {{ todo.title }}
     </div>
 
-    <div v-if="type === 'active'" class="todo__list__item__buttons">
+    <div v-if="type === 'active'" class="todo-list-item-buttons">
       <button class="btn btn-green" @click="toggleTodo" title="Complete task">
         <i class="icon-check"></i>
       </button>
@@ -14,7 +14,7 @@
       </button>
     </div>
 
-    <div v-if="type === 'completed'" class="todo__list__item__buttons">
+    <div v-if="type === 'completed'" class="todo-list-item-buttons">
       <button
         v-if="type === 'completed'"
         @click="toggleTodo"
